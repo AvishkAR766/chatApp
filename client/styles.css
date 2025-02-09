@@ -1,0 +1,218 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: linear-gradient(
+      to right top,
+      #d16ba5,
+      #c777b9,
+      #ba83ca,
+      #aa8fd8,
+      #9a9ae1,
+      #8aa7ec,
+      #79b3f4,
+      #69bff8,
+      #52cffe,
+      #41dfff,
+      #46eefa,
+      #5ffbf1
+  );
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+nav {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 15px;
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+}
+
+.container {
+  height: calc(100vh - 180px);
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  margin: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.message {
+  padding: 10px 15px;
+  margin: 8px;
+  border-radius: 18px;
+  max-width: 60%;
+  word-wrap: break-word;
+  position: relative;
+  clear: both;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.left {
+  float: left;
+  background: white;
+  border-bottom-left-radius: 5px;
+}
+
+.right {
+  float: right;
+  background: #dcf8c6;
+  border-bottom-right-radius: 5px;
+}
+
+.system {
+  background: rgba(255, 255, 255, 0.3);
+  color: #333;
+  text-align: center;
+  margin: 10px auto;
+  float: none;
+  max-width: 50%;
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+}
+
+.typing-indicator {
+  color: rgba(0, 0, 0, 0.6);
+  font-style: italic;
+  padding: 8px 15px;
+  margin: 5px 10px;
+  clear: both;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 15px;
+  display: inline-block;
+  float: left;
+}
+
+.send {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+#send-container {
+  display: flex;
+  gap: 10px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  align-items: center;
+}
+
+#messageInp {
+  flex: 1;
+  padding: 15px;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  background: white;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  background: #11998e;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: #0d7377;
+  transform: translateY(-1px);
+}
+
+/* File Upload Styles */
+.file-input {
+  display: none;
+}
+
+.attach-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  color: #128C7E;
+  transition: all 0.3s ease;
+}
+
+.attach-button:hover {
+  transform: scale(1.1);
+}
+
+.attach-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Image Message Styles */
+.image-container {
+  max-width: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-container.loaded {
+  opacity: 1;
+}
+
+.shared-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar Styling */
+.container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .container {
+      margin: 10px;
+      height: calc(100vh - 160px);
+  }
+
+  .message {
+      max-width: 85%;
+  }
+
+  .btn {
+      padding: 15px 20px;
+  }
+}
