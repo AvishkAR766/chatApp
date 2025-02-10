@@ -32,7 +32,8 @@ while (!userName || userName.trim() === '') {
     }
 }
 
-const socket = io('http://localhost:8000');
+// const socket = io('http://localhost:8000');
+const socket = io('https://your-netlify-site.netlify.app/.netlify/functions/server');
 
 // DOM elements
 const sendContainer = document.getElementById('send-container');

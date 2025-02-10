@@ -1,0 +1,12 @@
+[build]
+  functions = "serverless"
+  publish = "client"
+
+[dev]
+  publish = "client"
+  functions = "serverless"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/server"
+  status = 200
