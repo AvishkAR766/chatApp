@@ -26,8 +26,8 @@ const io = socketIo(server, {
 // Cloudinary configuration
 cloudinary.config({
     cloud_name: 'dgi6i6qpz',
-    api_key: '53932383287359',
-    api_secret: 'Ooo5T1brOWEXoEfUPzGy4Rm3U6s'
+    api_key: '888545921376281',
+    api_secret: 'Ii606eRsEq88gyI-ifspG4JMOD0'
 });
 
 // Test Cloudinary connection

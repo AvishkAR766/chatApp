@@ -1,3 +1,29 @@
+// Message storage functions
+const STORAGE_KEY = 'chatMessages';
+
+const saveMessageToStorage = (message) => {
+    const messages = getMessagesFromStorage();
+    messages.push(message);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+};
+
+const getMessagesFromStorage = () => {
+    const messages = localStorage.getItem(STORAGE_KEY);
+    return messages ? JSON.parse(messages) : [];
+};
+
+const clearMessageStorage = () => {
+    localStorage.removeItem(STORAGE_KEY);
+};
+
+// Load messages when page loads
+const loadStoredMessages = () => {
+    const messages = getMessagesFromStorage();
+    messages.forEach(msg => {
+        append(msg.content, msg.position);
+    });
+};
+
 let userName;
 while (!userName || userName.trim() === '') {
     userName = prompt('Enter your name to join');
@@ -14,15 +40,27 @@ const messageInput = document.getElementById('messageInp');
 const messageContainer = document.querySelector('.container');
 const fileInput = document.querySelector('.file-input');
 const attachButton = document.querySelector('.attach-button');
+const clearChatBtn = document.getElementById('clearChat');
 
 // Initialize audio
 let audio;
 try {
-    audio = new Audio('/messageSound.mp3');
+    audio = new Audio('messageSound.mp3');
 } catch (error) {
     console.log('Audio initialization failed:', error);
     audio = { play: () => {} };
 }
+
+// Load stored messages when page loads
+document.addEventListener('DOMContentLoaded', loadStoredMessages);
+
+// Clear chat functionality
+clearChatBtn.addEventListener('click', () => {
+    if (confirm('Are you sure you want to clear the chat history?')) {
+        clearMessageStorage();
+        messageContainer.innerHTML = '';
+    }
+});
 
 // Create typing indicator
 const typingIndicator = document.createElement('div');
@@ -110,12 +148,36 @@ const append = (data, position) => {
         
         imgContainer.appendChild(img);
         messageElement.appendChild(imgContainer);
+
+        // Save image message
+        if (position !== 'system') {
+            saveMessageToStorage({
+                content: { type: 'image', url: data.url },
+                position: position,
+                timestamp: new Date().getTime()
+            });
+        }
     } else if (position === 'system') {
         messageElement.innerText = data;
+        // Save system message
+        saveMessageToStorage({
+            content: data,
+            position: position,
+            timestamp: new Date().getTime()
+        });
     } else {
         messageElement.innerText = position === 'right' ? 
             `You: ${data}` : 
             typeof data === 'string' ? data : `${data.name}: ${data.message}`;
+        
+        // Save text message
+        if (position !== 'system') {
+            saveMessageToStorage({
+                content: typeof data === 'string' ? data : `${data.name}: ${data.message}`,
+                position: position,
+                timestamp: new Date().getTime()
+            });
+        }
     }
 
     messageContainer.appendChild(messageElement);
